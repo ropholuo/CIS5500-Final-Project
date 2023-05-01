@@ -14,28 +14,30 @@ const AuthorsPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Popular Authors</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Author</th>
-            <th>Number of Books</th>
-            <th>Number of Ratings</th>
-            <th>Average Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          {popularAuthors.map(author => (
-            <tr key={author.Author}>
-              <td>{author.Author}</td>
-              <td>{author.num_books}</td>
-              <td>{author.num_rating}</td>
-              <td>{author.avg_rating}</td>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <div>
+        <h1 style={{ textAlign: 'center' }}>Popular Authors</h1>
+        <table style={{ maxWidth: '90%', margin: '0 auto', border: '1px solid #ccc', textAlign: 'left', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th style={{ border: '1px solid #ccc', padding: '8px' }}>Author</th>
+              <th style={{ border: '1px solid #ccc', padding: '8px' }}>Number of Books</th>
+              <th style={{ border: '1px solid #ccc', padding: '8px' }}>Number of Ratings</th>
+              <th style={{ border: '1px solid #ccc', padding: '8px' }}>Average Rating</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {popularAuthors.map(author => (
+              <tr key={author.Author}>
+                <td style={{ border: '1px solid #ccc', padding: '8px' }}>{author.Author}</td>
+                <td style={{ border: '1px solid #ccc', padding: '8px' }}>{author.num_books}</td>
+                <td style={{ border: '1px solid #ccc', padding: '8px' }}>{author.num_rating}</td>
+                <td style={{ border: '1px solid #ccc', padding: '8px' }}>{author.avg_rating}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
