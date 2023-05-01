@@ -13,7 +13,7 @@ const BookRatingByLocation = () => {
   const [searched, setSearched] = useState(false);
 
   useEffect(() => {
-    if (title) {
+    if (title && searched) {
       const fetchData = async () => {
         const response = await fetch(`http://${config.server_host}:${config.server_port}/avgRatingByLocation?title=${title}`);
         const data = await response.json();
@@ -22,33 +22,24 @@ const BookRatingByLocation = () => {
         const ageResponse = await fetch(`http://${config.server_host}:${config.server_port}/ageGroupByLocation?title=${title}`);
         const ageData = await ageResponse.json();
         setAgeData(ageData);
-        const ratingCountResponse = await fetch(`http://${config.server_host}:${config.server_port}/getBookRatingsMap?ISBN=${title}`);
-        const ratingCountData = await ratingCountResponse.json();
-        setRatingCountData(ratingCountData);
-      };
-      fetchData();
-    }
-  }, [title]);
 
-  const handleSearch = () => {
-    if (title) {
-        setSearched(true);
-      const fetchData = async () => {
-        const response = await fetch(`http://${config.server_host}:${config.server_port}/avgRatingByLocation?title=${title}`);
-        const data = await response.json();
-        setBookData(data);
-
-        const ageResponse = await fetch(`http://${config.server_host}:${config.server_port}/ageGroupByLocation?title=${title}`);
-        const ageData = await ageResponse.json();
-        setAgeData(ageData);
-        
         const ratingCountResponse = await fetch(`http://${config.server_host}:${config.server_port}/getBookRatingsMap?title=${title}`);
         const ratingCountData = await ratingCountResponse.json();
         setRatingCountData(ratingCountData);
       };
       fetchData();
     }
+  }, [title, searched]);
+
+  useEffect(() => {
+    setSearched(false);
+  }, [title]);
+
+const handleSearch = () => {
+  if (title) {
+    setSearched(true);
   }
+};
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
